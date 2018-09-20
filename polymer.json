@@ -1,5 +1,6 @@
 {
   "entrypoint": "index.html",
+  "basePath": "/pick",
   "shell": "src/components/my-app.js",
   "sources": [
     "images/**/*"
