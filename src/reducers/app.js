@@ -14,10 +14,11 @@ import {
   OPEN_SNACKBAR,
   CLOSE_SNACKBAR,
   UPDATE_DRAWER_STATE,
-  UPDATE_SONG
+  UPDATE_SONG,
+  STORE_SONGS
 } from '../actions/app.js';
 
-const app = (state = {drawerOpened: false}, action) => {
+const app = (state = {products: {}, drawerOpened: false}, action) => {
   switch (action.type) {
     case UPDATE_PAGE:
       return {
@@ -45,10 +46,16 @@ const app = (state = {drawerOpened: false}, action) => {
         snackbarOpened: false
       };
     case UPDATE_SONG:
+      var song = state.products[action.song];
       return {
         ...state,
-        song: action.song
-      }
+        song: song
+      };
+    case STORE_SONGS:
+      return {
+        ...state,
+        products: action.products
+      };
     default:
       return state;
   }

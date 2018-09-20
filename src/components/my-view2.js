@@ -35,37 +35,21 @@ class MyView2 extends connect(store)(PageViewElement) {
     return html`
       ${SharedStyles}
       <section>
-        <h2>Redux example: simple counter</h2>
-        <div class="circle">${this._value}</div>
-        <p>This page contains a reusable <code>&lt;counter-element&gt;</code>. The
-        element is not built in a Redux-y way (you can think of it as being a
-        third-party element you got from someone else), but this page is connected to the
-        Redux store. When the element updates its counter, this page updates the values
-        in the Redux store, and you can see the current value of the counter reflected in
-        the bubble above.</p>
-        <br><br>
-      </section>
-      <section>
-        <p>
-          <counter-element value="${this._value}" clicks="${this._clicks}"
-              @counter-incremented="${() => store.dispatch(increment())}"
-              @counter-decremented="${() => store.dispatch(decrement())}">
-          </counter-element>
-        </p>
+        <a href="/">&laquo; Back to list</a>
+        <h2>${this.song.song_name} - ${this.song.artist_name}</h2>
+        <pre>${this.song.lyrics}</pre>
       </section>
     `;
   }
 
   static get properties() { return {
     // This is the data from the store.
-    _clicks: { type: Number },
-    _value: { type: Number },
+    _song_id: { type: Number }
   }}
 
   // This is called every time something is updated in the store.
   _stateChanged(state) {
-    this._clicks = state.counter.clicks;
-    this._value = state.counter.value;
+    this.song = state.app.song;
   }
 }
 

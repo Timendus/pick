@@ -18,7 +18,7 @@ import { store } from '../store.js';
 import './song-item.js';
 
 // These are the actions needed by this element.
-import { getAllProducts, addToCart } from '../actions/shop.js';
+import { fetchSongs } from '../actions/app.js';
 
 // These are the elements needed by this element.
 import { addToCartIcon } from './my-icons.js';
@@ -38,7 +38,7 @@ class SongList extends connect(store)(LitElement) {
         const item = this._products[key];
         return html`
           <li>
-            <a href="/song/${item.id}">${item.title} - ${item.artist}</a>
+            <a href="/song/${item.id}">${item.song_name} - ${item.artist_name}</a>
           </li>
         `
       })}
@@ -51,12 +51,12 @@ class SongList extends connect(store)(LitElement) {
   }}
 
   firstUpdated() {
-    store.dispatch(getAllProducts());
+    store.dispatch(fetchSongs());
   }
 
   // This is called every time something is updated in the store.
   _stateChanged(state) {
-    this._products = state.shop.products;
+    this._products = state.app.products;
   }
 }
 

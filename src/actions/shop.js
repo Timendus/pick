@@ -24,16 +24,33 @@ export const getAllProducts = () => (dispatch, getState) => {
   // that by dispatching an async action (that you would dispatch when you
   // succesfully got the data back)
 
-  // You could reformat the data in the right format as well:
-  const products = PRODUCT_LIST.reduce((obj, product) => {
-    obj[product.id] = product
-    return obj
-  }, {});
+  var request = new XMLHttpRequest();
+  request.open('GET', 'https://limitless-bastion-37095.herokuapp.com/api/chords', true);
+  request.onload = function() {
+    if (request.status >= 200 && request.status < 400) {
+      // Success!
+      try {
+        var song_list = JSON.parse(request.responseText);
+      } catch(e) {
+        console.log("Error parsing JSON: ", e);
+      }
 
-  dispatch({
-    type: GET_PRODUCTS,
-    products: products
-  });
+      // You could reformat the data in the right format as well:
+      const products = (song_list || PRODUCT_LIST).reduce((obj, product) => {
+        obj[product.id] = product
+        return obj
+      }, {});
+
+      dispatch({
+        type: GET_PRODUCTS,
+        products: products
+      });
+    } else {
+      console.log("Server returned an error:", request);
+    }
+  };
+  request.onerror = function() { console.log("Could not connect", request); };
+  request.send();
 };
 
 export const checkout = (productId) => (dispatch) => {

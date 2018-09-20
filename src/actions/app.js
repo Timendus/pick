@@ -13,6 +13,8 @@ export const UPDATE_OFFLINE = 'UPDATE_OFFLINE';
 export const UPDATE_DRAWER_STATE = 'UPDATE_DRAWER_STATE';
 export const OPEN_SNACKBAR = 'OPEN_SNACKBAR';
 export const CLOSE_SNACKBAR = 'CLOSE_SNACKBAR';
+export const UPDATE_SONG = 'UPDATE_SONG';
+export const STORE_SONGS = 'STORE_SONGS';
 
 export const navigate = (path) => (dispatch) => {
   // Extract the page name from path.
@@ -28,7 +30,10 @@ export const navigate = (path) => (dispatch) => {
 
 const loadPage = (page) => (dispatch) => {
   console.log(page);
-  switch(page) {
+  var parts = page.split('/');
+  console.log(parts);
+
+  switch(parts[0] || page) {
     // case 'view1':
     //   import('../components/my-view1.js').then((module) => {
     //     // Put code in here that you want to run every time when
@@ -36,7 +41,15 @@ const loadPage = (page) => (dispatch) => {
     //   });
     //   break;
     case 'song':
-      import('../components/my-view2.js');
+      var song = 1 * parts[1];
+      if (song > 0) {
+        page = 'view2';
+        import('../components/my-view2.js');
+        dispatch(updateSong(song));
+      } else {
+        page = 'view404';
+        import('../components/my-view404.js');
+      }
       break;
     case 'view3':
       import('../components/my-view3.js');
@@ -47,6 +60,55 @@ const loadPage = (page) => (dispatch) => {
   }
 
   dispatch(updatePage(page));
+};
+
+
+const TESTING_SONGS = [
+  {"id": 34876, "title": "Smoke on the water", "artist": "The Chainsmokers"},
+  {"id": 25874, "title": "Helder", "artist": "Johnny and the chain wizards"}
+];
+
+export const fetchSongs = () => (dispatch, getState) => {
+  // Here you would normally get the data from the server. We're simulating
+  // that by dispatching an async action (that you would dispatch when you
+  // succesfully got the data back)
+
+  var request = new XMLHttpRequest();
+  request.open('GET', 'https://limitless-bastion-37095.herokuapp.com/api/chords', true);
+  request.onload = function() {
+    if (request.status >= 200 && request.status < 400) {
+      // Success!
+      try {
+        var song_list = JSON.parse(request.responseText);
+      } catch(e) {
+        console.log("Error parsing JSON: ", e);
+      }
+
+      // You could reformat the data in the right format as well:
+      const products = (song_list || TESTING_SONGS).reduce((obj, product) => {
+        obj[product.id] = product
+        return obj
+      }, {});
+
+      dispatch({
+        type: STORE_SONGS,
+        products: products
+      });
+    } else {
+      console.log("Server returned an error:", request);
+    }
+  };
+  request.onerror = function() { console.log("Could not connect", request); };
+  request.send();
+};
+
+
+const updateSong = (song) => {
+  console.log("hoi");
+  return {
+    type: UPDATE_SONG,
+    song
+  };
 };
 
 const updatePage = (page) => {
