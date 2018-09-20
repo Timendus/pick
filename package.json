@@ -1,0 +1,15 @@
+{
+  "name": "Pick",
+  "version": "0.0.1",
+  "contributors": [
+    "Tim Franssen"
+  ],
+  "repository": "Timendus/pick",
+  "scripts": {
+    "start": "autoreload-server ./ 8081"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "simple-autoreload-server": "^0.2.7"
+  }
+}
