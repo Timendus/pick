@@ -15,7 +15,7 @@ import { connect } from 'pwa-helpers/connect-mixin.js';
 import { store } from '../store.js';
 
 // These are the elements needed by this element.
-import './shop-item.js';
+import './song-item.js';
 
 // These are the actions needed by this element.
 import { getAllProducts, addToCart } from '../actions/shop.js';
@@ -26,28 +26,23 @@ import { addToCartIcon } from './my-icons.js';
 // These are the shared styles needed by this element.
 import { ButtonSharedStyles } from './button-shared-styles.js';
 
-class ShopProducts extends connect(store)(LitElement) {
+class SongList extends connect(store)(LitElement) {
   render() {
     return html`
       ${ButtonSharedStyles}
       <style>
         :host { display: block; }
       </style>
+      <ul>
       ${Object.keys(this._products).map((key) => {
         const item = this._products[key];
         return html`
-          <div>
-            <shop-item name="${item.title}" amount="${item.inventory}" price="${item.price}"></shop-item>
-            <button
-                .disabled="${item.inventory === 0}"
-                @click="${(e) => store.dispatch(addToCart(e.currentTarget.dataset['index']))}"
-                data-index="${item.id}"
-                title="${item.inventory === 0 ? 'Sold out' : 'Add to cart' }">
-              ${item.inventory === 0 ? 'Sold out': addToCartIcon }
-            </button>
-          </div>
+          <li>
+            <a href="/song/${item.id}">${item.title} - ${item.artist}</a>
+          </li>
         `
       })}
+      </ul>
     `;
   }
 
@@ -65,4 +60,4 @@ class ShopProducts extends connect(store)(LitElement) {
   }
 }
 
-window.customElements.define('shop-products', ShopProducts);
+window.customElements.define('song-list', SongList);

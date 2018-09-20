@@ -1,11 +1,11 @@
 {
-  "name": "pwa-starter-kit",
-  "version": "0.8.0",
+  "name": "Pick",
+  "version": "0.0.1",
   "contributors": [
-    "The Polymer Authors"
+    "Tim Franssen"
   ],
   "license": "BSD-3-Clause",
-  "repository": "Polymer/pwa-starter-kit",
+  "repository": "Timendus/pick",
   "scripts": {
     "start": "polymer serve",
     "build": "npm run build:prpl-server && npm run build:static",

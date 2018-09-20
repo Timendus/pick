@@ -13,7 +13,8 @@ import {
   UPDATE_OFFLINE,
   OPEN_SNACKBAR,
   CLOSE_SNACKBAR,
-  UPDATE_DRAWER_STATE
+  UPDATE_DRAWER_STATE,
+  UPDATE_SONG
 } from '../actions/app.js';
 
 const app = (state = {drawerOpened: false}, action) => {
@@ -43,6 +44,11 @@ const app = (state = {drawerOpened: false}, action) => {
         ...state,
         snackbarOpened: false
       };
+    case UPDATE_SONG:
+      return {
+        ...state,
+        song: action.song
+      }
     default:
       return state;
   }

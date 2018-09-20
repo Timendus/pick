@@ -11,23 +11,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 import { LitElement, html } from '@polymer/lit-element';
 
 // This element is *not* connected to the Redux store.
-class ShopItem extends LitElement {
+class SongItem extends LitElement {
   render() {
     return html`
-      ${this.name}:
-      <span ?hidden="${this.amount === 0}">${this.amount} * </span>
-      $${this.price}
-      </span>
+      ${this.title} - ${this.artist}
     `;
   }
 
   static get properties() {
     return {
-      name: { type: String },
-      amount: { type: String },
-      price: { type: String }
+      title: { type: String },
+      artist: { type: String }
     }
   }
 }
 
-window.customElements.define('shop-item', ShopItem);
+window.customElements.define('song-item', SongItem);

@@ -16,7 +16,7 @@ import { store } from '../store.js';
 
 // These are the elements needed by this element.
 import { removeFromCartIcon } from './my-icons.js';
-import './shop-item.js';
+import './song-item.js';
 
 // These are the actions needed by this element.
 import { removeFromCart } from '../actions/shop.js';
@@ -39,7 +39,7 @@ class ShopCart extends connect(store)(LitElement) {
       ${_items.map((item) =>
         html`
           <div>
-            <shop-item name="${item.title}" amount="${item.amount}" price="${item.price}"></shop-item>
+            <song-item name="${item.title}" amount="${item.amount}" price="${item.price}"></song-item>
             <button
                 @click="${(e) => store.dispatch(removeFromCart(e.currentTarget.dataset['index']))}"
                 data-index="${item.id}"

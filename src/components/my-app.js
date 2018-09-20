@@ -139,7 +139,6 @@ class MyApp extends connect(store)(LitElement) {
       }
 
       .main-content {
-        padding-top: 64px;
         min-height: 100vh;
       }
 
@@ -169,10 +168,6 @@ class MyApp extends connect(store)(LitElement) {
           display: none;
         }
 
-        .main-content {
-          padding-top: 107px;
-        }
-
         /* The drawer button isn't shown in the wide layout, so we don't
         need to offset the title */
         [main-title] {
@@ -180,31 +175,6 @@ class MyApp extends connect(store)(LitElement) {
         }
       }
     </style>
-
-    <!-- Header -->
-    <app-header condenses reveals effects="waterfall">
-      <app-toolbar class="toolbar-top">
-        <button class="menu-btn" title="Menu" @click="${_ => store.dispatch(updateDrawerState(true))}">${menuIcon}</button>
-        <div main-title>${appTitle}</div>
-      </app-toolbar>
-
-      <!-- This gets hidden on a small screen-->
-      <nav class="toolbar-list">
-        <a ?selected="${_page === 'view1'}" href="/view1">View One</a>
-        <a ?selected="${_page === 'view2'}" href="/view2">View Two</a>
-        <a ?selected="${_page === 'view3'}" href="/view3">View Three</a>
-      </nav>
-    </app-header>
-
-    <!-- Drawer content -->
-    <app-drawer .opened="${_drawerOpened}"
-        @opened-changed="${e => store.dispatch(updateDrawerState(e.target.opened))}">
-      <nav class="drawer-list">
-        <a ?selected="${_page === 'view1'}" href="/view1">View One</a>
-        <a ?selected="${_page === 'view2'}" href="/view2">View Two</a>
-        <a ?selected="${_page === 'view3'}" href="/view3">View Three</a>
-      </nav>
-    </app-drawer>
 
     <!-- Main content -->
     <main role="main" class="main-content">
@@ -215,7 +185,7 @@ class MyApp extends connect(store)(LitElement) {
     </main>
 
     <footer>
-      <p>Made with &hearts; by the Polymer team.</p>
+      <p>Made with &hearts; by Bob and Tim.</p>
     </footer>
 
     <snack-bar ?active="${_snackbarOpened}">
