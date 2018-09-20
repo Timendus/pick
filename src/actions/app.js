@@ -17,6 +17,10 @@ export const UPDATE_SONG = 'UPDATE_SONG';
 export const STORE_SONGS = 'STORE_SONGS';
 
 export const navigate = (path) => (dispatch) => {
+  if (path.startsWith("/pick")) {
+    path = path.substring(5);
+  }
+
   // Extract the page name from path.
   const page = path === '/' ? 'view3' : path.slice(1);
 
