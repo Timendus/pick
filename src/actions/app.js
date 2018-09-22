@@ -78,7 +78,7 @@ export const fetchSongs = () => (dispatch, getState) => {
   // succesfully got the data back)
 
   var request = new XMLHttpRequest();
-  request.open('GET', 'https://limitless-bastion-37095.herokuapp.com/api/chords', true);
+  request.open('GET', 'https://limitless-bastion-37095.herokuapp.com/api/songs', true);
   request.onload = function() {
     if (request.status >= 200 && request.status < 400) {
       // Success!
