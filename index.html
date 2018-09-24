@@ -101,6 +101,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </noscript>
 
     <section id="list-page" class="page list active">
+      <div class="search-control">
+        <input type="search" id="search-song"
+               placeholder="Search for songs..."
+               aria-label="Search through song content">
+        <button onclick="searchSong()">Search</button>
+      </div>
       <h1>Epic list of songs</h1>
       <ul id="song-list">
       </ul>

@@ -20,7 +20,34 @@ window.addEventListener('load', function() {
     document.getElementById(page).classList.add('active');
   }
 
+  window.searchSong = function() {
+      query = document.getElementById("search-song").value;
+      var request = new XMLHttpRequest();
+      request.open('GET', 'https://limitless-bastion-37095.herokuapp.com/api/songs?query='+query, true);
+      request.onload = function() {
+          if (request.status >= 200 && request.status < 400) {
+              // Success!
+              try {
+                  var song_list = JSON.parse(request.responseText);
+              } catch(e) {
+                  console.log("Error parsing JSON: ", e);
+              }
 
+              // You could reformat the data in the right format as well:
+              const products = song_list.reduce((obj, product) => {
+                  obj[product.id] = product
+                  return obj
+              }, {});
+
+              window.globalSongList = products;
+              redraw();
+          } else {
+              console.log("Server returned an error:", request);
+          }
+      };
+      request.onerror = function() { console.log("Could not connect", request); };
+      request.send();
+  }
 
   function redraw() {
     console.log("redraw!");
