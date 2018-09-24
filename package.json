@@ -6,7 +6,7 @@
   ],
   "repository": "Timendus/pick",
   "scripts": {
-    "start": "browser-sync start --server --files 'css/*.css'"
+    "start": "browser-sync start --server --files '*'"
   },
   "dependencies": {},
   "devDependencies": {

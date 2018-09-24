@@ -18,6 +18,7 @@ window.addEventListener('load', function() {
   window.selectPage = function(page) {
     document.querySelectorAll('.page').forEach(function(e) {e.classList.remove('active')});
     document.getElementById(page).classList.add('active');
+    window.scrollTo(0,0);
   }
 
   window.searchSong = function() {
@@ -95,3 +96,10 @@ window.addEventListener('load', function() {
   loadList();
 
 });
+
+// Load and register pre-caching Service Worker
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', function() {
+    navigator.serviceWorker.register('service-worker.js');
+  });
+}
