@@ -6,7 +6,7 @@ window.addEventListener('load', function() {
 
   function selectSong(id) {
     function markupChords(lyrics) {
-      return lyrics;
+      return lyrics.replace(/\[ch\]([\w\#\/\\]*)\[\/ch\]/gi, "<span class='chord'>$1</span>");
     }
 
     var song = window.globalSongList[id];
