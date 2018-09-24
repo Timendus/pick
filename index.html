@@ -63,20 +63,19 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
     <section id="list-page" class="page list active">
       <form id="search-control">
-        <input type="search" id="search-song"
+        <input id="search-song"
                placeholder="Search for songs..."
                aria-label="Search through song content" />
-        <button class="search-button" type="submit">Search</button>
+        <button class="search-button" type="submit">🔍</button>
       </form>
       <h1>Epic list of songs</h1>
       <ul id="song-list"></ul>
     </section>
 
     <section id="song-page" class="page song">
-      <a class="backButton">&laquo; Back to list</a>
+      <a class="back-button">&laquo; Back to list</a>
       <h1 id="song-title"></h1>
       <pre id="song-lyrics"></pre>
-      <a class="back-button">&laquo; Back to list</a>
     </section>
 
     <script src="pick-magic.js"></script>

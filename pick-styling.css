@@ -4,6 +4,8 @@ body {
   line-height: 1.5;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
+  background-color: black;
+  color: #ffea00;
 }
 
 section.page {
@@ -14,4 +16,64 @@ section.page {
 }
 section.page.active {
   display: block;
+}
+
+#song-list{
+  padding-left: 0;
+}
+
+#song-list li{
+  list-style-type: none;
+  padding: 0.3em;
+}
+#song-list li:hover{
+  background-color: #111;
+  cursor: pointer;
+}
+
+#search-control{
+  display:flex;
+}
+
+#search-song{
+  background-color: #111;
+  border: 1px solid #111;
+  border-radius: 10px 0 0 10px;
+  padding: 0.5em;
+  color: #eee;
+  width: 100%;
+  flex: 1
+}
+.search-button {
+  background-color: #222;
+  border: 1px solid #222;
+  flex: 0;
+  border-radius: 0 10px 10px 0;
+}
+.search-button:hover{
+  background-color: #ffea00;
+}
+
+.song-link {
+  width: 100%;
+  display: inline-block;
+}
+
+.back-button {
+  background-color:#ffea00;
+  -moz-border-radius:10px;
+  -webkit-border-radius:10px;
+  border-radius:10px;
+  border:1px solid #ffea00;
+  display:inline-block;
+  cursor:pointer;
+  color:#111;
+  font-size:15px;
+  padding:8px;
+  text-decoration:none;
+}
+
+.back-button:hover{
+  background-color:#222;
+  color: #ffea00;
 }
