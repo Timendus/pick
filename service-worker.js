@@ -3,9 +3,9 @@ self.addEventListener('install', function(event) {
     caches.open('pick').then(function(cache) {
       return cache.addAll(
         [
-          '/index.html',
-          '/pick-styling.css',
-          '/pick-magic.js'
+          'index.html',
+          'pick-styling.css',
+          'pick-magic.js'
         ]
       );
     })
