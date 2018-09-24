@@ -1,57 +1,139 @@
+:root {
+  --primary-yellow: #ffea00;
+  --background-black: #000000;
+  --soft-yellow: #56500b;
+
+  --background-gray: #2f2f2f;
+  --border-gray: #616161;
+
+  --list-borders: #323284;
+  --list-even-rows: #00003c;
+  --list-even-rows-hover: #000033;
+  --list-odd-rows: #0d0d5d;
+  --list-odd-rows-hover: #060656;
+
+  --button: #0d0d5d;
+  --button-borders: #323284;
+  --button-hover: #060656;
+}
+
 body {
   margin: 0;
+  padding: 0;
   font-family: Tahoma,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
   line-height: 1.5;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-  background-color: black;
-  color: #ffea00;
+  background-color: var(--background-black);
+  color: var(--primary-yellow);
 }
+
+/* Page magic */
 
 section.page {
   display: none;
-  padding: 1vw;
   max-width: 900px;
   margin: 0 auto;
+  overflow: auto;
 }
 section.page.active {
   display: block;
 }
 
-#song-list{
-  padding-left: 0;
-}
+/* Chord selection toggles */
 
-#song-list li{
-  list-style-type: none;
-  padding: 0.3em;
+#chord-search {
+  background-color: var(--soft-yellow);
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 0.8em;
+  border-radius: 10px;
 }
-#song-list li:hover{
-  background-color: #111;
+#chord-search p {
+  margin: 0 0 1em 0;
+}
+#chord-search input {
+  display: none;
+}
+#chord-search label {
+  display: inline-block;
+  margin: 0.1em 0;
+  padding: 0.5em;
+
+  color: var(--primary-yellow);
+  background-color: var(--background-gray);
+  border-radius: 10px;
   cursor: pointer;
 }
+#chord-search input:checked + label {
+  color: black;
+  background-color: var(--primary-yellow);
+}
 
-#search-control{
+/* Song list styling */
+
+h1 {
+  text-align: center;
+}
+#song-list {
+  padding: 0;
+  border: 1px solid var(--list-borders);
+  border-bottom: 0;
+}
+#song-list li {
+  list-style-type: none;
+  border-bottom: 1px solid var(--list-borders);
+  background-color: var(--list-odd-rows);
+  cursor: pointer;
+}
+#song-list li a {
+  padding: 1em;
+}
+#song-list li:nth-child(even) {
+  background-color: var(--list-even-rows);
+}
+#song-list li:hover {
+  background-color: var(--list-odd-rows-hover);
+}
+#song-list li:nth-child(even):hover {
+  background-color: var(--list-even-rows-hover);
+}
+
+/* Seach component styling */
+
+#search-control {
+  margin-top: 1em;
   display:flex;
 }
-
-#search-song{
-  background-color: #111;
-  border: 1px solid #111;
-  border-radius: 10px 0 0 10px;
-  padding: 0.5em;
-  color: #eee;
+#search-song {
+  flex: 1;
+  padding: 1rem;
   width: 100%;
-  flex: 1
+
+  background-color: var(--background-gray);
+  border: 1px solid var(--border-gray);
+  border-right: 0;
+  border-radius: 10px 0 0 10px;
+
+  font-family: Tahoma,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-size: 1em;
+  color: white;
+}
+#search-song:focus {
+  outline: none;
+}
+#search-song::placeholder {
+  color: #eeeeee;
 }
 .search-button {
-  background-color: #222;
-  border: 1px solid #222;
+  background-color: var(--background-gray);
+  border: 1px solid var(--border-gray);
   flex: 0;
   border-radius: 0 10px 10px 0;
 }
-.search-button:hover{
-  background-color: #ffea00;
+.search-button:hover {
+  background-color: var(--button-hover);
+  cursor: pointer;
 }
 
 .song-link {
@@ -59,48 +141,50 @@ section.page.active {
   display: inline-block;
 }
 
-.back-button {
-  background-color:#ffea00;
-  -moz-border-radius:10px;
-  -webkit-border-radius:10px;
-  border-radius:10px;
-  border:1px solid #ffea00;
-  display:inline-block;
-  cursor:pointer;
-  color:#111;
-  font-size:15px;
-  padding:8px;
-  text-decoration:none;
-}
+/* Lyrics / chords page styling */
 
-.back-button:hover{
-  background-color:#222;
-  color: #ffea00;
+pre {
+  width: 100%;
+  overflow: auto;
+  font-size: 16px;
 }
-
 span.chord {
-  background-color: #ffea00;
+  background-color: var(--primary-yellow);
   color: black;
   padding: 0 3px;
   margin: 0 -6px 0 0;
 }
 
-#chord-search {
-  margin-top: 15px;
-}
+.back-button {
+  display: inline-block;
+  margin: 1em 0;
+  padding: 0.5em 1em;
 
-#chord-search input {
-  display: none;
-}
-
-#chord-search label {
-  cursor: pointer;
-  background-color: #fff7a3;
-  padding: 0.5em;
-  color: black;
+  text-decoration: none;
+  color: white;
+  background-color: var(--button);
+  border: 1px solid var(--button-borders);
   border-radius: 10px;
+  cursor: pointer;
+}
+.back-button:hover {
+  background-color: var(--button-hover);
 }
 
-#chord-search input:checked + label {
-  background-color: #ffea00;
+/* Mobile specific styling */
+
+@media only screen and (max-width: 900px) {
+  #search-control, .back-button, #chord-search {
+    margin: 1em;
+  }
+  #song-list {
+    border-left: 0;
+    border-right: 0;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  pre {
+    font-size: calc(4px + 1.5vw);
+  }
 }
