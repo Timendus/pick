@@ -1,7 +1,8 @@
 :root {
   --primary-yellow: #ffea00;
   --background-black: #000000;
-  --background-blue: #0d0d5d;
+  --soft-yellow: #56500b;
+
   --background-gray: #2f2f2f;
   --border-gray: #616161;
 
@@ -42,23 +43,31 @@ section.page.active {
 /* Chord selection toggles */
 
 #chord-search {
-  margin-top: 15px;
+  background-color: var(--soft-yellow);
+  margin-top: 1rem;
+  padding: 1rem;
+  font-size: 0.8em;
+  border-radius: 10px;
 }
-
+#chord-search p {
+  margin: 0 0 1em 0;
+}
 #chord-search input {
   display: none;
 }
-
 #chord-search label {
-  cursor: pointer;
-  background-color: #fff7a3;
+  display: inline-block;
+  margin: 0.1em 0;
   padding: 0.5em;
-  color: black;
-  border-radius: 10px;
-}
 
+  color: var(--primary-yellow);
+  background-color: var(--background-gray);
+  border-radius: 10px;
+  cursor: pointer;
+}
 #chord-search input:checked + label {
-  background-color: #ffea00;
+  color: black;
+  background-color: var(--primary-yellow);
 }
 
 /* Song list styling */
@@ -98,7 +107,7 @@ h1 {
 }
 #search-song {
   flex: 1;
-  padding: 0.5em;
+  padding: 1rem;
   width: 100%;
 
   background-color: var(--background-gray);
@@ -165,7 +174,7 @@ span.chord {
 /* Mobile specific styling */
 
 @media only screen and (max-width: 900px) {
-  #search-control, .back-button {
+  #search-control, .back-button, #chord-search {
     margin: 1em;
   }
   #song-list {
