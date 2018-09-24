@@ -84,3 +84,23 @@ span.chord {
   padding: 0 3px;
   margin: 0 -6px 0 0;
 }
+
+#chord-search {
+  margin-top: 15px;
+}
+
+#chord-search input {
+  display: none;
+}
+
+#chord-search label {
+  cursor: pointer;
+  background-color: #fff7a3;
+  padding: 0.5em;
+  color: black;
+  border-radius: 10px;
+}
+
+#chord-search input:checked + label {
+  background-color: #ffea00;
+}
