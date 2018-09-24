@@ -70,9 +70,36 @@ window.addEventListener('load', function() {
   }
 
   // Displaying lists of sings
-  function searchChords(){
-      var checkedBoxes = document.querySelectorAll('input[name=chords]:checked');
-      console.log(checkedBoxes)
+  function searchChords(e){
+    var chordsChecked = Array.from(document.getElementsByName('chords')).filter((checkbox) => checkbox.checked).map((checkbox) => `chord=${encodeURIComponent(checkbox.id)}`);
+    var query = chordsChecked.join('&');
+    if ( query == "" ) { renderHistory(); return false; }
+    var request = new XMLHttpRequest();
+    request.open('GET', 'https://limitless-bastion-37095.herokuapp.com/api/songs?'+ query, true);
+    request.onload = function() {
+      if (request.status >= 200 && request.status < 400) {
+        // Success!
+        try {
+          var song_list = JSON.parse(request.responseText);
+        } catch(e) {
+          console.log("Error parsing JSON: ", e);
+        }
+
+        // You could reformat the data in the right format as well:
+        const products = song_list.reduce((obj, product) => {
+          obj[product.id] = product
+          return obj
+        }, {});
+
+        addSongs(products);
+        render(products);
+      } else {
+        console.log("Server returned an error:", request);
+      }
+    };
+    request.onerror = function() { console.log("Could not connect", request); };
+    request.send();
+    return false;
   }
 
   function renderHistory() {
@@ -131,7 +158,7 @@ window.addEventListener('load', function() {
       selectPage('list-page');
     });
   });
-  document.getElementsByName('chords').addEventListener('click', searchChords);
+  document.getElementsByName('chords').forEach(el => el.addEventListener('click', searchChords));
 
   renderHistory();
 });
