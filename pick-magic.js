@@ -1,10 +1,10 @@
 window.addEventListener('load', function() {
 
-  console.log("Initializing");
+  console.log("Initializing Pick");
 
   window.globalSongList = {};
 
-  window.selectSong = function(id) {
+  function selectSong(id) {
     function markupChords(lyrics) {
       return lyrics;
     }
@@ -15,39 +15,42 @@ window.addEventListener('load', function() {
     selectPage('song-page');
   }
 
-  window.selectPage = function(page) {
+  function selectPage(page) {
     document.querySelectorAll('.page').forEach(function(e) {e.classList.remove('active')});
     document.getElementById(page).classList.add('active');
     window.scrollTo(0,0);
   }
 
-  window.searchSong = function() {
+  function searchSong(e) {
       query = document.getElementById("search-song").value;
       var request = new XMLHttpRequest();
       request.open('GET', 'https://limitless-bastion-37095.herokuapp.com/api/songs?query='+query, true);
       request.onload = function() {
-          if (request.status >= 200 && request.status < 400) {
-              // Success!
-              try {
-                  var song_list = JSON.parse(request.responseText);
-              } catch(e) {
-                  console.log("Error parsing JSON: ", e);
-              }
-
-              // You could reformat the data in the right format as well:
-              const products = song_list.reduce((obj, product) => {
-                  obj[product.id] = product
-                  return obj
-              }, {});
-
-              window.globalSongList = products;
-              redraw();
-          } else {
-              console.log("Server returned an error:", request);
+        if (request.status >= 200 && request.status < 400) {
+          // Success!
+          try {
+            var song_list = JSON.parse(request.responseText);
+          } catch(e) {
+            console.log("Error parsing JSON: ", e);
           }
+
+          // You could reformat the data in the right format as well:
+          const products = song_list.reduce((obj, product) => {
+            obj[product.id] = product
+            return obj
+          }, {});
+
+          window.globalSongList = products;
+          redraw();
+        } else {
+          console.log("Server returned an error:", request);
+        }
       };
       request.onerror = function() { console.log("Could not connect", request); };
       request.send();
+
+      e.preventDefault();
+      return false;
   }
 
   function redraw() {
@@ -55,45 +58,20 @@ window.addEventListener('load', function() {
     console.log(globalSongList);
 
     document.getElementById("song-list").innerHTML = generateSongList(window.globalSongList);
+    document.querySelectorAll('.song-link').forEach(function(b) { b.addEventListener('click', function(e) { console.log(e); selectSong(e.target.getAttribute('song-id')); });});
   }
 
   function generateSongList(songList) {
     var html = "";
     Object.entries(songList).forEach(function(song) {
-      html += "<li onclick='selectSong("+song[0]+")'>"+song[1].song_name+" - "+song[1].artist_name+"</li>";
+      html += "<li><a class='song-link' song-id='"+song[0]+"'>"+song[1].song_name+" - "+song[1].artist_name+"</a></li>";
     });
     return html;
   }
 
-  function loadList() {
-    var request = new XMLHttpRequest();
-    request.open('GET', 'https://limitless-bastion-37095.herokuapp.com/api/songs', true);
-    request.onload = function() {
-      if (request.status >= 200 && request.status < 400) {
-        // Success!
-        try {
-          var song_list = JSON.parse(request.responseText);
-        } catch(e) {
-          console.log("Error parsing JSON: ", e);
-        }
-
-        // You could reformat the data in the right format as well:
-        const products = song_list.reduce((obj, product) => {
-          obj[product.id] = product
-          return obj
-        }, {});
-
-        window.globalSongList = products;
-        redraw();
-      } else {
-        console.log("Server returned an error:", request);
-      }
-    };
-    request.onerror = function() { console.log("Could not connect", request); };
-    request.send();
-  }
-
-  loadList();
+  // Attach events to buttons
+  document.getElementById('search-control').addEventListener('submit', searchSong);
+  document.querySelectorAll('.back-button').forEach(function(b) { b.addEventListener('click', function() { selectPage('list-page'); }); });
 
 });
 
