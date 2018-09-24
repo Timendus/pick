@@ -23,7 +23,7 @@ window.addEventListener('load', function() {
   window.searchSong = function() {
       query = document.getElementById("search-song").value;
       var request = new XMLHttpRequest();
-      request.open('GET', 'https://limitless-bastion-37095.herokuapp.com/api/songs?query='+query, true);
+      request.open('GET', 'https://limitless-bastion-37095.herokuapp.com/api/songs?query='+encodeURIComponent(query), true);
       request.onload = function() {
           if (request.status >= 200 && request.status < 400) {
               // Success!
