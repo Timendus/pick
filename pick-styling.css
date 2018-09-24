@@ -77,3 +77,10 @@ section.page.active {
   background-color:#222;
   color: #ffea00;
 }
+
+span.chord {
+  background-color: yellow;
+  color: black;
+  padding: 0 3px;
+  margin: 0 -6px 0 0;
+}
