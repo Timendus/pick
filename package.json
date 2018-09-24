@@ -6,10 +6,10 @@
   ],
   "repository": "Timendus/pick",
   "scripts": {
-    "start": "autoreload-server ./ 8081"
+    "start": "browser-sync start --server --files 'css/*.css'"
   },
   "dependencies": {},
   "devDependencies": {
-    "simple-autoreload-server": "^0.2.7"
+    "browser-sync": "^2.24.7"
   }
 }
