@@ -54,11 +54,15 @@ window.addEventListener('load', function() {
   }
 
   function redraw() {
-    console.log("redraw!");
-    console.log(globalSongList);
-
+    // Refresh list
     document.getElementById("song-list").innerHTML = generateSongList(window.globalSongList);
-    document.querySelectorAll('.song-link').forEach(function(b) { b.addEventListener('click', function(e) { console.log(e); selectSong(e.target.getAttribute('song-id')); });});
+
+    // Update event handlers
+    document.querySelectorAll('.song-link').forEach(function(b) {
+      b.addEventListener('click', function(e) {
+        selectSong(e.target.getAttribute('song-id'));
+      });
+    });
   }
 
   function generateSongList(songList) {
@@ -71,7 +75,11 @@ window.addEventListener('load', function() {
 
   // Attach events to buttons
   document.getElementById('search-control').addEventListener('submit', searchSong);
-  document.querySelectorAll('.back-button').forEach(function(b) { b.addEventListener('click', function() { selectPage('list-page'); }); });
+  document.querySelectorAll('.back-button').forEach(function(b) {
+    b.addEventListener('click', function() {
+      selectPage('list-page');
+    });
+  });
 
 });
 
