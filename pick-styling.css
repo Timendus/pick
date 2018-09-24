@@ -79,7 +79,7 @@ section.page.active {
 }
 
 span.chord {
-  background-color: yellow;
+  background-color: #ffea00;
   color: black;
   padding: 0 3px;
   margin: 0 -6px 0 0;
