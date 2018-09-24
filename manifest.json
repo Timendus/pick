@@ -4,8 +4,8 @@
   "description": "Pick your songs. Then pick them on your guitar. It's epic.",
   "start_url": "/",
   "display": "standalone",
-  "theme_color": "#3f51b5",
-  "background_color": "#3f51b5",
+  "theme_color": "#0d0d5d",
+  "background_color": "#000000",
   "icons": [
     {
       "src": "images/manifest/icon-192x192.png",
