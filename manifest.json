@@ -2,7 +2,7 @@
   "name": "Pick",
   "short_name": "Pick",
   "description": "Pick your songs. Then pick them on your guitar. It's epic.",
-  "start_url": "/",
+  "start_url": "index.html",
   "display": "standalone",
   "theme_color": "#0d0d5d",
   "background_color": "#000000",
