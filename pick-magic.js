@@ -70,6 +70,10 @@ window.addEventListener('load', function() {
   }
 
   // Displaying lists of sings
+  function searchChords(){
+      var checkedBoxes = document.querySelectorAll('input[name=chords]:checked');
+      console.log(checkedBoxes)
+  }
 
   function renderHistory() {
       var songHistory = JSON.parse(localStorage.getItem('songHistory') || "[]");
@@ -127,9 +131,9 @@ window.addEventListener('load', function() {
       selectPage('list-page');
     });
   });
+  document.getElementsByName('chords').addEventListener('click', searchChords);
 
   renderHistory();
-
 });
 
 // Load and register pre-caching Service Worker
