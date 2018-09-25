@@ -6,10 +6,19 @@
   ],
   "repository": "Timendus/pick",
   "scripts": {
-    "start": "browser-sync start --server --files '*'"
+    "start": "concurrently \"npm run watch-stylesheets\" \"npm run watch-javascripts\" \"npm run serve\"",
+    "serve": "browser-sync start --server --files '*'",
+    "watch-stylesheets": "onchange 'assets/css/**/*.*' -- npm run sass",
+    "watch-javascripts": "babel assets/js --watch --out-file pick-magic.js --source-maps",
+    "sass": "sass assets/css/index.scss pick-styling.css"
   },
   "dependencies": {},
   "devDependencies": {
-    "browser-sync": "^2.24.7"
+    "@babel/cli": "^7.1.0",
+    "@babel/core": "^7.1.0",
+    "browser-sync": "^2.24.7",
+    "concurrently": "^3.6.1",
+    "onchange": "^4.1.0",
+    "sass": "^1.10.1"
   }
 }

@@ -2,16 +2,13 @@
   --primary-yellow: #ffea00;
   --background-black: #000000;
   --soft-yellow: #56500b;
-
   --background-gray: #2f2f2f;
   --border-gray: #616161;
-
   --list-borders: #323284;
   --list-even-rows: #00003c;
   --list-even-rows-hover: #000033;
   --list-odd-rows: #0d0d5d;
   --list-odd-rows-hover: #060656;
-
   --button: #0d0d5d;
   --button-borders: #323284;
   --button-hover: #060656;
@@ -20,7 +17,7 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: Tahoma,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-family: Tahoma, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   line-height: 1.5;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
@@ -29,7 +26,6 @@ body {
 }
 
 /* Page magic */
-
 section.page {
   display: none;
   max-width: 900px;
@@ -41,7 +37,6 @@ section.page.active {
 }
 
 /* Chord selection toggles */
-
 #chord-search {
   background-color: var(--soft-yellow);
   margin-top: 1rem;
@@ -59,7 +54,6 @@ section.page.active {
   display: inline-block;
   margin: 0.1em 0;
   padding: 0.5em;
-
   color: var(--primary-yellow);
   background-color: var(--background-gray);
   border-radius: 10px;
@@ -69,12 +63,17 @@ section.page.active {
   color: black;
   background-color: var(--primary-yellow);
 }
+@media only screen and (max-width: 900px) {
+  #chord-search {
+    margin: 1em;
+  }
+}
 
 /* Song list styling */
-
 h1 {
   text-align: center;
 }
+
 #song-list {
   padding: 0;
   border: 1px solid var(--list-borders);
@@ -89,77 +88,87 @@ h1 {
 #song-list li a {
   padding: 1em;
 }
-#song-list li:nth-child(even) {
-  background-color: var(--list-even-rows);
-}
 #song-list li:hover {
   background-color: var(--list-odd-rows-hover);
+}
+#song-list li:nth-child(even) {
+  background-color: var(--list-even-rows);
 }
 #song-list li:nth-child(even):hover {
   background-color: var(--list-even-rows-hover);
 }
+#song-list .song-link {
+  width: 100%;
+  display: inline-block;
+}
+@media only screen and (max-width: 900px) {
+  #song-list {
+    border-left: 0;
+    border-right: 0;
+  }
+}
 
 /* Seach component styling */
-
 #search-control {
   margin-top: 1em;
-  display:flex;
+  display: flex;
 }
-#search-song {
+@media only screen and (max-width: 900px) {
+  #search-control {
+    margin: 1em;
+  }
+}
+#search-control #search-song {
   flex: 1;
   padding: 1rem;
   width: 100%;
-
   background-color: var(--background-gray);
   border: 1px solid var(--border-gray);
   border-right: 0;
   border-radius: 10px 0 0 10px;
-
-  font-family: Tahoma,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-family: Tahoma, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   font-size: 1em;
   color: white;
 }
-#search-song:focus {
+#search-control #search-song:focus {
   outline: none;
 }
-#search-song::placeholder {
+#search-control #search-song::placeholder {
   color: #eeeeee;
 }
-.search-button {
+#search-control .search-button {
   background-color: var(--background-gray);
   border: 1px solid var(--border-gray);
   flex: 0;
   border-radius: 0 10px 10px 0;
 }
-.search-button:hover {
+#search-control .search-button:hover {
   background-color: var(--button-hover);
   cursor: pointer;
 }
 
-.song-link {
-  width: 100%;
-  display: inline-block;
-}
-
 /* Lyrics / chords page styling */
-
 pre {
   width: 100%;
   overflow: auto;
   font-size: 16px;
 }
-span.chord {
+pre span.chord {
   background-color: var(--primary-yellow);
   color: black;
   padding: 0 3px;
   margin: 0 -6px 0 0;
+}
+@media only screen and (max-width: 768px) {
+  pre {
+    font-size: calc(4px + 1.5vw);
+  }
 }
 
 .back-button {
   display: inline-block;
   margin: 1em 0;
   padding: 0.5em 1em;
-
   text-decoration: none;
   color: white;
   background-color: var(--button);
@@ -170,21 +179,10 @@ span.chord {
 .back-button:hover {
   background-color: var(--button-hover);
 }
-
-/* Mobile specific styling */
-
 @media only screen and (max-width: 900px) {
-  #search-control, .back-button, #chord-search {
+  .back-button {
     margin: 1em;
   }
-  #song-list {
-    border-left: 0;
-    border-right: 0;
-  }
 }
 
-@media only screen and (max-width: 768px) {
-  pre {
-    font-size: calc(4px + 1.5vw);
-  }
-}
+/*# sourceMappingURL=pick-styling.css.map */
