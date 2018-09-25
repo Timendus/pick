@@ -6,10 +6,11 @@
   ],
   "repository": "Timendus/pick",
   "scripts": {
-    "start": "concurrently \"npm run watch-stylesheets\" \"npm run watch-javascripts\" \"npm run serve\"",
+    "start": "concurrently \"npm run watch-stylesheets\" \"npm run watch-javascripts-app\" \"npm run serve\" \"npm run watch-javascripts-sw\"",
     "serve": "browser-sync start --server --files '*'",
     "watch-stylesheets": "onchange 'assets/css/**/*.*' -- npm run sass",
-    "watch-javascripts": "babel assets/js --watch --out-file pick-magic.js --source-maps",
+    "watch-javascripts-app": "babel assets/js/app --watch --out-file pick-magic.js --source-maps",
+    "watch-javascripts-sw": "babel assets/js/service-worker --watch --out-file service-worker.js --source-maps",
     "sass": "sass assets/css/index.scss pick-styling.css"
   },
   "dependencies": {},
