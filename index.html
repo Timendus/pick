@@ -51,14 +51,14 @@
       Please enable JavaScript to view this website.
     </noscript>
 
-    <section id="list-page" class="page list active">
-      <form id="search-control">
+    <section id="list-page" class="page song-list active">
+      <form id="search-control" class="text-search">
         <input id="search-song"
                placeholder="Search for songs..."
                aria-label="Search through song content" />
         <button class="search-button" type="submit">🔍</button>
       </form>
-      <div id="chord-search">
+      <div class="chord-search">
         <p>I only know these chords:</p>
         <input id="C" type="checkbox" name="chords"/><label for="C">C</label>
         <input id="G" type="checkbox" name="chords"/><label for="G">G</label>
@@ -84,7 +84,7 @@
       <ul id="song-list"></ul>
     </section>
 
-    <section id="song-page" class="page song">
+    <section id="song-page" class="page song-item">
       <a class="back-button">&laquo; Back to list</a>
       <h1 id="song-title"></h1>
       <pre id="song-lyrics"></pre>

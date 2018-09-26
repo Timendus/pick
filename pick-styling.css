@@ -21,16 +21,19 @@ section.page.active {
 }
 
 /* Seach component styling */
-#search-control {
+.page.song-list {
+  /* Chord selection toggles */
+}
+.page.song-list .text-search {
   margin-top: 1em;
   display: flex;
 }
 @media only screen and (max-width: 900px) {
-  #search-control {
+  .page.song-list .text-search {
     margin: 1em;
   }
 }
-#search-control #search-song {
+.page.song-list .text-search input {
   flex: 1;
   padding: 1rem;
   width: 100%;
@@ -42,38 +45,36 @@ section.page.active {
   font-size: 1em;
   color: white;
 }
-#search-control #search-song:focus {
+.page.song-list .text-search input:focus {
   outline: none;
 }
-#search-control #search-song::placeholder {
+.page.song-list .text-search input::placeholder {
   color: #eeeeee;
 }
-#search-control .search-button {
+.page.song-list .text-search .search-button {
   background-color: #2f2f2f;
   border: 1px solid #616161;
   flex: 0;
   border-radius: 0 10px 10px 0;
 }
-#search-control .search-button:hover {
+.page.song-list .text-search .search-button:hover {
   background-color: #060656;
   cursor: pointer;
 }
-
-/* Chord selection toggles */
-#chord-search {
+.page.song-list .chord-search {
   background-color: #56500b;
   margin-top: 1rem;
   padding: 1rem;
   font-size: 0.8em;
   border-radius: 10px;
 }
-#chord-search p {
+.page.song-list .chord-search p {
   margin: 0 0 1em 0;
 }
-#chord-search input {
+.page.song-list .chord-search input {
   display: none;
 }
-#chord-search label {
+.page.song-list .chord-search label {
   display: inline-block;
   margin: 0.1em 0;
   padding: 0.5em;
@@ -82,74 +83,70 @@ section.page.active {
   border-radius: 10px;
   cursor: pointer;
 }
-#chord-search input:checked + label {
+.page.song-list .chord-search input:checked + label {
   color: black;
   background-color: #ffea00;
 }
 @media only screen and (max-width: 900px) {
-  #chord-search {
+  .page.song-list .chord-search {
     margin: 1em;
   }
 }
 
 /* Song list styling */
-h1 {
+.page.song-list h1 {
   text-align: center;
 }
-
-#song-list {
+.page.song-list ul {
   padding: 0;
   border: 1px solid #323284;
   border-bottom: 0;
 }
-#song-list li {
+@media only screen and (max-width: 900px) {
+  .page.song-list ul {
+    border-left: 0;
+    border-right: 0;
+  }
+}
+.page.song-list ul li {
   list-style-type: none;
   border-bottom: 1px solid #323284;
   background-color: #0d0d5d;
   cursor: pointer;
 }
-#song-list li a {
-  padding: 1em;
-}
-#song-list li:hover {
+.page.song-list ul li:hover {
   background-color: #060656;
 }
-#song-list li:nth-child(even) {
+.page.song-list ul li:nth-child(even) {
   background-color: #00003c;
 }
-#song-list li:nth-child(even):hover {
+.page.song-list ul li:nth-child(even):hover {
   background-color: #000033;
 }
-#song-list .song-link {
+.page.song-list ul li a {
+  padding: 1em;
   width: 100%;
   display: inline-block;
 }
-@media only screen and (max-width: 900px) {
-  #song-list {
-    border-left: 0;
-    border-right: 0;
-  }
-}
 
 /* Lyrics / chords page styling */
-pre {
+.page.song-item pre {
   width: 100%;
   overflow: auto;
   font-size: 16px;
 }
-pre span.chord {
+.page.song-item pre span.chord {
   background-color: #ffea00;
   color: black;
   padding: 0 3px;
   margin: 0 -6px 0 0;
 }
 @media only screen and (max-width: 768px) {
-  pre {
+  .page.song-item pre {
     font-size: calc(4px + 1.5vw);
   }
 }
-
-.back-button {
+.page.song-item .back-button {
   display: inline-block;
   margin: 1em 0;
   padding: 0.5em 1em;
@@ -160,11 +157,11 @@ pre span.chord {
   border-radius: 10px;
   cursor: pointer;
 }
-.back-button:hover {
+.page.song-item .back-button:hover {
   background-color: #060656;
 }
 @media only screen and (max-width: 900px) {
-  .back-button {
+  .page.song-item .back-button {
     margin: 1em;
   }
 }

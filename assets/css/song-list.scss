@@ -1,46 +1,46 @@
-@import 'colours';
-
 /* Song list styling */
 
-h1 {
-  text-align: center;
-}
+.page.song-list {
+  @import 'colours';
 
-#song-list {
-  padding: 0;
-  border: 1px solid $list-borders;
-  border-bottom: 0;
+  h1 {
+    text-align: center;
+  }
 
-  li {
-    list-style-type: none;
-    border-bottom: 1px solid $list-borders;
-    background-color: $list-odd-rows;
-    cursor: pointer;
+  ul {
+    padding: 0;
+    border: 1px solid $list-borders;
+    border-bottom: 0;
 
-    a {
-      padding: 1em;
+    @media only screen and (max-width: 900px) {
+      border-left: 0;
+      border-right: 0;
     }
 
-    &:hover {
-      background-color: $list-odd-rows-hover;
-    }
-
-    &:nth-child(even) {
-      background-color: $list-even-rows;
+    li {
+      list-style-type: none;
+      border-bottom: 1px solid $list-borders;
+      background-color: $list-odd-rows;
+      cursor: pointer;
 
       &:hover {
-        background-color: $list-even-rows-hover;
+        background-color: $list-odd-rows-hover;
+      }
+
+      &:nth-child(even) {
+        background-color: $list-even-rows;
+
+        &:hover {
+          background-color: $list-even-rows-hover;
+        }
+      }
+
+      a {
+        padding: 1em;
+        width: 100%;
+        display: inline-block;
       }
     }
   }
 
-  .song-link {
-    width: 100%;
-    display: inline-block;
-  }
-
-  @media only screen and (max-width: 900px) {
-    border-left: 0;
-    border-right: 0;
-  }
 }
