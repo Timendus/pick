@@ -1,35 +1,15 @@
-:root {
-  --primary-yellow: #ffea00;
-  --background-black: #000000;
-  --soft-yellow: #56500b;
-
-  --background-gray: #2f2f2f;
-  --border-gray: #616161;
-
-  --list-borders: #323284;
-  --list-even-rows: #00003c;
-  --list-even-rows-hover: #000033;
-  --list-odd-rows: #0d0d5d;
-  --list-odd-rows-hover: #060656;
-
-  --button: #0d0d5d;
-  --button-borders: #323284;
-  --button-hover: #060656;
-}
-
 body {
   margin: 0;
   padding: 0;
-  font-family: Tahoma,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+  font-family: Tahoma, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   line-height: 1.5;
   min-height: 100vh;
   -webkit-font-smoothing: antialiased;
-  background-color: var(--background-black);
-  color: var(--primary-yellow);
+  background-color: #000000;
+  color: #ffea00;
 }
 
 /* Page magic */
-
 section.page {
   display: none;
   max-width: 900px;
@@ -40,151 +20,150 @@ section.page.active {
   display: block;
 }
 
-/* Chord selection toggles */
-
-#chord-search {
-  background-color: var(--soft-yellow);
+/* Seach component styling */
+.page.song-list {
+  /* Chord selection toggles */
+}
+.page.song-list .text-search {
+  margin-top: 1em;
+  display: flex;
+}
+@media only screen and (max-width: 900px) {
+  .page.song-list .text-search {
+    margin: 1em;
+  }
+}
+.page.song-list .text-search input {
+  flex: 1;
+  padding: 1rem;
+  width: 100%;
+  background-color: #2f2f2f;
+  border: 1px solid #616161;
+  border-right: 0;
+  border-radius: 10px 0 0 10px;
+  font-family: Tahoma, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  font-size: 1em;
+  color: white;
+}
+.page.song-list .text-search input:focus {
+  outline: none;
+}
+.page.song-list .text-search input::placeholder {
+  color: #eeeeee;
+}
+.page.song-list .text-search .search-button {
+  background-color: #2f2f2f;
+  border: 1px solid #616161;
+  flex: 0;
+  border-radius: 0 10px 10px 0;
+}
+.page.song-list .text-search .search-button:hover {
+  background-color: #060656;
+  cursor: pointer;
+}
+.page.song-list .chord-search {
+  background-color: #56500b;
   margin-top: 1rem;
   padding: 1rem;
   font-size: 0.8em;
   border-radius: 10px;
 }
-#chord-search p {
+.page.song-list .chord-search p {
   margin: 0 0 1em 0;
 }
-#chord-search input {
+.page.song-list .chord-search input {
   display: none;
 }
-#chord-search label {
+.page.song-list .chord-search label {
   display: inline-block;
   margin: 0.1em 0;
   padding: 0.5em;
-
-  color: var(--primary-yellow);
-  background-color: var(--background-gray);
+  color: #ffea00;
+  background-color: #2f2f2f;
   border-radius: 10px;
   cursor: pointer;
 }
-#chord-search input:checked + label {
+.page.song-list .chord-search input:checked + label {
   color: black;
-  background-color: var(--primary-yellow);
+  background-color: #ffea00;
+}
+@media only screen and (max-width: 900px) {
+  .page.song-list .chord-search {
+    margin: 1em;
+  }
 }
 
 /* Song list styling */
-
-h1 {
+.page.song-list h1 {
   text-align: center;
 }
-#song-list {
+.page.song-list ul {
   padding: 0;
-  border: 1px solid var(--list-borders);
+  border: 1px solid #323284;
   border-bottom: 0;
 }
-#song-list li {
+@media only screen and (max-width: 900px) {
+  .page.song-list ul {
+    border-left: 0;
+    border-right: 0;
+  }
+}
+.page.song-list ul li {
   list-style-type: none;
-  border-bottom: 1px solid var(--list-borders);
-  background-color: var(--list-odd-rows);
+  border-bottom: 1px solid #323284;
+  background-color: #0d0d5d;
   cursor: pointer;
 }
-#song-list li a {
+.page.song-list ul li:hover {
+  background-color: #060656;
+}
+.page.song-list ul li:nth-child(even) {
+  background-color: #00003c;
+}
+.page.song-list ul li:nth-child(even):hover {
+  background-color: #000033;
+}
+.page.song-list ul li a {
   padding: 1em;
-}
-#song-list li:nth-child(even) {
-  background-color: var(--list-even-rows);
-}
-#song-list li:hover {
-  background-color: var(--list-odd-rows-hover);
-}
-#song-list li:nth-child(even):hover {
-  background-color: var(--list-even-rows-hover);
-}
-
-/* Seach component styling */
-
-#search-control {
-  margin-top: 1em;
-  display:flex;
-}
-#search-song {
-  flex: 1;
-  padding: 1rem;
-  width: 100%;
-
-  background-color: var(--background-gray);
-  border: 1px solid var(--border-gray);
-  border-right: 0;
-  border-radius: 10px 0 0 10px;
-
-  font-family: Tahoma,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
-  font-size: 1em;
-  color: white;
-}
-#search-song:focus {
-  outline: none;
-}
-#search-song::placeholder {
-  color: #eeeeee;
-}
-.search-button {
-  background-color: var(--background-gray);
-  border: 1px solid var(--border-gray);
-  flex: 0;
-  border-radius: 0 10px 10px 0;
-}
-.search-button:hover {
-  background-color: var(--button-hover);
-  cursor: pointer;
-}
-
-.song-link {
   width: 100%;
   display: inline-block;
 }
 
 /* Lyrics / chords page styling */
-
-pre {
+.page.song-item pre {
   width: 100%;
   overflow: auto;
   font-size: 16px;
 }
-span.chord {
-  background-color: var(--primary-yellow);
+.page.song-item pre span.chord {
+  background-color: #ffea00;
   color: black;
   padding: 0 3px;
   margin: 0 -6px 0 0;
 }
-
-.back-button {
-  display: inline-block;
-  margin: 1em 0;
-  padding: 0.5em 1em;
-
-  text-decoration: none;
-  color: white;
-  background-color: var(--button);
-  border: 1px solid var(--button-borders);
-  border-radius: 10px;
-  cursor: pointer;
-}
-.back-button:hover {
-  background-color: var(--button-hover);
-}
-
-/* Mobile specific styling */
-
-@media only screen and (max-width: 900px) {
-  #search-control, .back-button, #chord-search {
-    margin: 1em;
-  }
-  #song-list {
-    border-left: 0;
-    border-right: 0;
-  }
-}
-
 @media only screen and (max-width: 768px) {
-  pre {
+  .page.song-item pre {
     font-size: calc(4px + 1.5vw);
   }
 }
+.page.song-item .back-button {
+  display: inline-block;
+  margin: 1em 0;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  color: white;
+  background-color: #0d0d5d;
+  border: 1px solid #323284;
+  border-radius: 10px;
+  cursor: pointer;
+}
+.page.song-item .back-button:hover {
+  background-color: #060656;
+}
+@media only screen and (max-width: 900px) {
+  .page.song-item .back-button {
+    margin: 1em;
+  }
+}
+
+/*# sourceMappingURL=pick-styling.css.map */
