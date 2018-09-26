@@ -2,58 +2,6 @@ window.addEventListener('load', function() {
 
   console.log("Initializing Pick");
 
-  // Service worker install
-
-  if ('serviceWorker' in navigator) {
-    navigator.serviceWorker.register('service-worker.js');
-  }
-
-  // PWA install prompt
-
-  let deferredPrompt;
-  window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent Chrome 67 and earlier from automatically showing the prompt
-    e.preventDefault();
-    // Stash the event so it can be triggered later.
-    deferredPrompt = e;
-    // Show the install button
-    document.querySelectorAll('.install-button').forEach(function(b) {
-      b.classList.add('active');
-      b.addEventListener('click', install2HS);
-    });
-  });
-
-  function install2HS() {
-    // Hide install button
-    document.querySelectorAll('.install-button').forEach(function(b) {
-      b.classList.remove('active');
-    });
-
-    deferredPrompt.prompt();
-    deferredPrompt.userChoice.then((choiceResult) => {
-      if (choiceResult.outcome !== 'accepted') {
-        document.querySelectorAll('.install-button').forEach(function(b) {
-          b.classList.add('active');
-        });
-      }
-    });
-  }
-
-  // Global song list
-
-  function getSongList() {
-    return JSON.parse(localStorage.getItem('songList') || "{}");
-  }
-
-  function getSong(id) {
-    return getSongList()[id];
-  }
-
-  function addSongs(list) {
-    var newList = Object.assign(getSongList(), list);
-    localStorage.setItem('songList', JSON.stringify(newList));
-  }
-
   // Global song history
 
   function updateSongHistory(song) {
@@ -76,7 +24,7 @@ window.addEventListener('load', function() {
 
   function searchSong(e) {
       e.preventDefault();
-      query = document.getElementById("search-song").value;
+      let query = document.getElementById("search-song").value;
       if ( query == "" ) { renderHistory(); return false; }
       var request = new XMLHttpRequest();
       request.open('GET', 'https://limitless-bastion-37095.herokuapp.com/api/songs?query='+encodeURIComponent(query), true);
@@ -95,7 +43,7 @@ window.addEventListener('load', function() {
             return obj
           }, {});
 
-          addSongs(products);
+          SongList.addSongs(products);
           render(products);
         } else {
           console.log("Server returned an error:", request);
@@ -128,7 +76,7 @@ window.addEventListener('load', function() {
           return obj
         }, {});
 
-        addSongs(products);
+        SongList.addSongs(products);
         render(products);
       } else {
         console.log("Server returned an error:", request);
@@ -141,7 +89,7 @@ window.addEventListener('load', function() {
 
   function renderHistory() {
       var songHistory = JSON.parse(localStorage.getItem('songHistory') || "[]");
-      var songHistoryList = songHistory.map(function(id) { return getSong(id); });
+      var songHistoryList = songHistory.map(function(id) { return SongList.getSong(id); });
       render(songHistoryList.reverse(), false);
   }
 
@@ -177,7 +125,7 @@ window.addEventListener('load', function() {
   }
 
   function selectSong(id) {
-    var song = getSong(id);
+    var song = SongList.getSong(id);
     document.getElementById("song-title").innerHTML = song.song_name + " - " + song.artist_name;
     document.getElementById("song-lyrics").innerHTML = markupChords(song.lyrics);
     selectPage('song-page');

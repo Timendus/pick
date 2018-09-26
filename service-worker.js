@@ -1,3 +1,5 @@
+"use strict";
+
 self.addEventListener('install', function (event) {
   event.waitUntil(caches.open('pick').then(function (cache) {
     return cache.addAll(['index.html', 'pick-styling.css', 'pick-magic.js']);
