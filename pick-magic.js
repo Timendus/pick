@@ -60,16 +60,17 @@ window.addEventListener('load', function () {
   var songListRenderer = new SongListRenderer(document.getElementById("song-list"));
   var songRenderer = new SongRenderer(document.getElementById("song"));
   var clickHandler = new ClickHandler();
-  var searchService = new SearchService();
+  var searchService = new SearchService(); // Bind click handlers
+
   clickHandler.register('[data-page-link]', selectPage);
   clickHandler.register('[data-song-link]', selectSong);
-  clickHandler.register('[name=chords]', searchChords); // Bind a submit of the search form to the search function
+  clickHandler.register('[name=chords]', search); // Bind form submit handler to the search function
 
   document.querySelectorAll('#search-control').forEach(function (b) {
-    b.addEventListener('submit', searchSong);
+    return b.addEventListener('submit', search);
   }); // Bootstrap song list
 
-  renderHistory(); // Helper functions
+  renderHistory(); // Helper event handlers
 
   function selectPage(elm) {
     document.querySelectorAll('.page').forEach(function (e) {
@@ -83,90 +84,33 @@ window.addEventListener('load', function () {
     var song = songRepository.getSong(elm.getAttribute('data-song-link'));
     songRenderer.draw(song);
     songHistory.add(song);
-    selectPage(elm);
   }
 
   function renderHistory() {
     songListRenderer.draw(songHistory.getSongList(), 'Recent songs');
-  } // Searching
+  }
 
-
-  function searchSong(e) {
-    e.preventDefault();
+  function search(e) {
     var query = document.getElementById("search-song").value;
-
-    if (query == "") {
-      renderHistory();
-      return false;
-    }
-
-    var request = new XMLHttpRequest();
-    request.open('GET', 'https://limitless-bastion-37095.herokuapp.com/api/songs?query=' + encodeURIComponent(query), true);
-
-    request.onload = function () {
-      if (request.status >= 200 && request.status < 400) {
-        // Success!
-        try {
-          var song_list = JSON.parse(request.responseText);
-        } catch (e) {
-          console.log("Error parsing JSON: ", e);
-        }
-
-        var songlist = new SongList(song_list);
-        songRepository.add(songlist);
-        songListRenderer.draw(songlist, 'Search results');
-      } else {
-        console.log("Server returned an error:", request);
-      }
-    };
-
-    request.onerror = function () {
-      console.log("Could not connect", request);
-    };
-
-    request.send();
-    return false;
-  } // Displaying lists of sings
-
-
-  function searchChords(e) {
-    var chordsChecked = Array.from(document.getElementsByName('chords')).filter(function (checkbox) {
+    var chords = Array.from(document.getElementsByName('chords')).filter(function (checkbox) {
       return checkbox.checked;
     }).map(function (checkbox) {
-      return "chord=".concat(encodeURIComponent(checkbox.id));
+      return checkbox.id;
     });
-    var query = chordsChecked.join('&');
 
-    if (query == "") {
+    if (query == "" && chords.length == 0) {
       renderHistory();
-      return false;
+    } else {
+      searchService.search(query, chords, function (songList) {
+        songRepository.add(songList);
+        songListRenderer.draw(songList, 'Search results');
+      });
     }
 
-    var request = new XMLHttpRequest();
-    request.open('GET', 'https://limitless-bastion-37095.herokuapp.com/api/songs?' + query, true);
+    if (e.preventDefault) {
+      e.preventDefault();
+    }
 
-    request.onload = function () {
-      if (request.status >= 200 && request.status < 400) {
-        // Success!
-        try {
-          var song_list = JSON.parse(request.responseText);
-        } catch (e) {
-          console.log("Error parsing JSON: ", e);
-        }
-
-        var songlist = new SongList(song_list);
-        songRepository.add(songlist);
-        songListRenderer.draw(songlist, 'Filter results');
-      } else {
-        console.log("Server returned an error:", request);
-      }
-    };
-
-    request.onerror = function () {
-      console.log("Could not connect", request);
-    };
-
-    request.send();
     return false;
   }
 });
@@ -213,7 +157,6 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-// This is work in progress
 var SearchService =
 /*#__PURE__*/
 function () {
@@ -222,88 +165,18 @@ function () {
 
     // Where does Bob's awesome API live?
     this.webservice = "https://limitless-bastion-37095.herokuapp.com/api/songs";
-  }
+  } // Expects a query string, an array of chords (in the form of strings) and a
+  // callback function for when we have a response
+
 
   _createClass(SearchService, [{
-    key: "searchSong",
-    value: function searchSong(e) {
-      e.preventDefault();
-      var query = document.getElementById("search-song").value;
+    key: "search",
+    value: function search(query, chords, callback) {
+      var chordsQuery = chords.map(function (chord) {
+        return "chord=".concat(encodeURIComponent(chord));
+      }).join('&');
 
-      if (query == "") {
-        renderHistory();
-        return false;
-      }
-
-      var request = new XMLHttpRequest();
-      request.open('GET', 'https://limitless-bastion-37095.herokuapp.com/api/songs?query=' + encodeURIComponent(query), true);
-
-      request.onload = function () {
-        if (request.status >= 200 && request.status < 400) {
-          // Success!
-          try {
-            var song_list = JSON.parse(request.responseText);
-          } catch (e) {
-            console.log("Error parsing JSON: ", e);
-          }
-
-          var songlist = new SongList(song_list);
-          songRepository.add(songlist);
-          songListRenderer.draw(songlist, 'Search results');
-        } else {
-          console.log("Server returned an error:", request);
-        }
-      };
-
-      request.onerror = function () {
-        console.log("Could not connect", request);
-      };
-
-      request.send();
-      return false;
-    } // Displaying lists of sings
-
-  }, {
-    key: "searchChords",
-    value: function searchChords(e) {
-      var chordsChecked = Array.from(document.getElementsByName('chords')).filter(function (checkbox) {
-        return checkbox.checked;
-      }).map(function (checkbox) {
-        return "chord=".concat(encodeURIComponent(checkbox.id));
-      });
-      var query = chordsChecked.join('&');
-
-      if (query == "") {
-        renderHistory();
-        return false;
-      }
-
-      var request = new XMLHttpRequest();
-      request.open('GET', 'https://limitless-bastion-37095.herokuapp.com/api/songs?' + query, true);
-
-      request.onload = function () {
-        if (request.status >= 200 && request.status < 400) {
-          // Success!
-          try {
-            var song_list = JSON.parse(request.responseText);
-          } catch (e) {
-            console.log("Error parsing JSON: ", e);
-          }
-
-          var songlist = new SongList(song_list);
-          songRepository.add(songlist);
-          songListRenderer.draw(songlist, 'Filter results');
-        } else {
-          console.log("Server returned an error:", request);
-        }
-      };
-
-      request.onerror = function () {
-        console.log("Could not connect", request);
-      };
-
-      request.send();
-      return false;
+      this._getRequest("".concat(this.webservice, "?").concat(query ? "query=".concat(encodeURIComponent(query)) : "").concat(query && chordsQuery ? "&" : "").concat(chords ? chordsQuery : ""), callback);
     }
   }, {
     key: "_getRequest",
@@ -313,23 +186,19 @@ function () {
 
       request.onload = function () {
         if (request.status >= 200 && request.status < 400) {
-          // Success!
           try {
-            var song_list = JSON.parse(request.responseText);
+            var songList = JSON.parse(request.responseText);
+            callback(new SongList(songList));
           } catch (e) {
             console.log("Error parsing JSON: ", e);
           }
-
-          var songlist = new SongList(song_list);
-          songRepository.add(songlist);
-          songListRenderer.draw(songlist, 'Filter results');
         } else {
           console.log("Server returned an error:", request);
         }
       };
 
       request.onerror = function () {
-        console.log("Could not connect", request);
+        return console.log("Could not connect", request);
       };
 
       request.send();
