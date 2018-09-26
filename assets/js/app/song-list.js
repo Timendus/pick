@@ -1,16 +1,10 @@
-class SongList {
+class SongList extends Array {
 
-  static allSongs() {
-    return JSON.parse(localStorage.getItem('songList') || "{}");
-  }
-
-  static getSong(id) {
-    return SongList.allSongs()[id];
-  }
-
-  static addSongs(list) {
-    let newList = Object.assign(SongList.allSongs(), list);
-    return localStorage.setItem('songList', JSON.stringify(newList));
+  constructor(songs) {
+    super();
+    if (Array.isArray(songs)) {
+      songs.forEach((song) => {this.push(song);});
+    }
   }
 
 }
