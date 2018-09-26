@@ -5,7 +5,7 @@ class SongRepository {
   }
 
   add(songlist) {
-    songlist.forEach((song) => {this._addSong(song, false);});
+    songlist.forEach((song) => this._addSong(song, false));
     this._saveToLocalStorage();
   }
 
@@ -19,7 +19,7 @@ class SongRepository {
 
   _addSong(song, saveToLocalStorage=true) {
     this.repository[song.id] = song;
-    if ( saveToLocalStorage ) { this._saveToLocalStorage(); }
+    if (saveToLocalStorage) this._saveToLocalStorage();
   }
 
   _saveToLocalStorage() {

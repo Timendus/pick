@@ -43,7 +43,7 @@ window.addEventListener('load', function() {
                       .filter((checkbox) => checkbox.checked)
                       .map((checkbox) => checkbox.id);
 
-    if ( query == "" && chords.length == 0 ) {
+    if (query == "" && chords.length == 0) {
       renderHistory();
     } else {
       searchService.search(query, chords, (songList) => {
@@ -52,7 +52,7 @@ window.addEventListener('load', function() {
       });
     }
 
-    if (e.preventDefault) { e.preventDefault(); }
+    if (e.preventDefault) e.preventDefault();
     return false;
   }
 

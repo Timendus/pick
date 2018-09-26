@@ -27,7 +27,7 @@ function () {
     _classCallCheck(this, ClickHandler);
 
     document.addEventListener('click', function (e) {
-      _this.handleClick(e);
+      return _this.handleClick(e);
     });
     this.handlers = {};
   }
@@ -107,10 +107,7 @@ window.addEventListener('load', function () {
       });
     }
 
-    if (e.preventDefault) {
-      e.preventDefault();
-    }
-
+    if (e.preventDefault) e.preventDefault();
     return false;
   }
 });
@@ -172,11 +169,12 @@ function () {
   _createClass(SearchService, [{
     key: "search",
     value: function search(query, chords, callback) {
-      var chordsQuery = chords.map(function (chord) {
+      var parameters = chords.map(function (chord) {
         return "chord=".concat(encodeURIComponent(chord));
-      }).join('&');
+      });
+      if (query) parameters.push("query=".concat(encodeURIComponent(query)));
 
-      this._getRequest("".concat(this.webservice, "?").concat(query ? "query=".concat(encodeURIComponent(query)) : "").concat(query && chordsQuery ? "&" : "").concat(chords ? chordsQuery : ""), callback);
+      this._getRequest("".concat(this.webservice, "?").concat(parameters.join('&')), callback);
     }
   }, {
     key: "_getRequest",
@@ -242,7 +240,7 @@ function () {
       } else {
         var songHistory = this._list();
 
-        songHistory.push(song.id);
+        songHistory.unshift(song.id);
         songHistory = songHistory.slice(0, 10);
         localStorage.setItem('songHistory', JSON.stringify(songHistory));
       }
@@ -329,7 +327,7 @@ function (_Array) {
 
     if (Array.isArray(songs)) {
       songs.forEach(function (song) {
-        _this.push(song);
+        return _this.push(song);
       });
     }
 
@@ -392,7 +390,7 @@ function () {
       var _this = this;
 
       songlist.forEach(function (song) {
-        _this._addSong(song, false);
+        return _this._addSong(song, false);
       });
 
       this._saveToLocalStorage();
@@ -412,10 +410,7 @@ function () {
     value: function _addSong(song) {
       var saveToLocalStorage = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
       this.repository[song.id] = song;
-
-      if (saveToLocalStorage) {
-        this._saveToLocalStorage();
-      }
+      if (saveToLocalStorage) this._saveToLocalStorage();
     }
   }, {
     key: "_saveToLocalStorage",

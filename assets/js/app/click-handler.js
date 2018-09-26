@@ -14,7 +14,7 @@
 class ClickHandler {
 
   constructor() {
-    document.addEventListener('click', (e) => {this.handleClick(e)});
+    document.addEventListener('click', (e) => this.handleClick(e));
     this.handlers = {};
   }
 

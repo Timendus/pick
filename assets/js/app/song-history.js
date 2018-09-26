@@ -11,7 +11,7 @@ class SongHistory {
   }
 
   add(song) {
-    if ( this._includes(song) ) {
+    if (this._includes(song)) {
       // Optional TODO: Push this song to the end of the list
       return;
     } else {
