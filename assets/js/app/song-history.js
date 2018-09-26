@@ -16,7 +16,7 @@ class SongHistory {
       return;
     } else {
       let songHistory = this._list();
-      songHistory.push(song.id);
+      songHistory.unshift(song.id);
       songHistory = songHistory.slice(0,10);
       localStorage.setItem('songHistory', JSON.stringify(songHistory));
     }
