@@ -1,0 +1,46 @@
+@import 'colours';
+
+/* Song list styling */
+
+h1 {
+  text-align: center;
+}
+
+#song-list {
+  padding: 0;
+  border: 1px solid $list-borders;
+  border-bottom: 0;
+
+  li {
+    list-style-type: none;
+    border-bottom: 1px solid $list-borders;
+    background-color: $list-odd-rows;
+    cursor: pointer;
+
+    a {
+      padding: 1em;
+    }
+
+    &:hover {
+      background-color: $list-odd-rows-hover;
+    }
+
+    &:nth-child(even) {
+      background-color: $list-even-rows;
+
+      &:hover {
+        background-color: $list-even-rows-hover;
+      }
+    }
+  }
+
+  .song-link {
+    width: 100%;
+    display: inline-block;
+  }
+
+  @media only screen and (max-width: 900px) {
+    border-left: 0;
+    border-right: 0;
+  }
+}
