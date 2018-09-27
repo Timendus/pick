@@ -2,7 +2,7 @@ class SearchService {
 
   constructor() {
     // Where does Bob's awesome API live?
-    this.webservice = "https://limitless-bastion-37095.herokuapp.com/api/songs";
+    this._webservice = "https://limitless-bastion-37095.herokuapp.com/api/songs";
   }
 
   // Expects a query string, an array of chords (in the form of strings) and a
@@ -11,7 +11,7 @@ class SearchService {
     let parameters = chords.map((chord) => `chord=${encodeURIComponent(chord)}`);
     if (query) parameters.push(`query=${encodeURIComponent(query)}`);
 
-    this._getRequest(`${this.webservice}?${parameters.join('&')}`, callback);
+    this._getRequest(`${this._webservice}?${parameters.join('&')}`, callback);
   }
 
   _getRequest(url, callback) {

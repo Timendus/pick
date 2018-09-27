@@ -1,12 +1,12 @@
 class SongHistory {
 
   constructor(repository) {
-    this.repository = repository;
+    this._repository = repository;
   }
 
   getSongList() {
     return new SongList(this._list().map((id) => {
-      return this.repository.getSong(id);
+      return this._repository.getSong(id);
     }));
   }
 

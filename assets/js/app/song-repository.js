@@ -1,7 +1,7 @@
 class SongRepository {
 
   constructor() {
-    this.repository = JSON.parse(localStorage.getItem('songList') || "{}");
+    this._repository = JSON.parse(localStorage.getItem('songList') || "{}");
   }
 
   add(songlist) {
@@ -10,20 +10,20 @@ class SongRepository {
   }
 
   getSong(id) {
-    return this.repository[id];
+    return this._repository[id];
   }
 
   getSongList() {
-    return new SongList(Object.values(this.repository));
+    return new SongList(Object.values(this._repository));
   }
 
   _addSong(song, saveToLocalStorage=true) {
-    this.repository[song.id] = song;
+    this._repository[song.id] = song;
     if (saveToLocalStorage) this._saveToLocalStorage();
   }
 
   _saveToLocalStorage() {
-    localStorage.setItem('songList', JSON.stringify(this.repository));
+    localStorage.setItem('songList', JSON.stringify(this._repository));
   }
 
 }

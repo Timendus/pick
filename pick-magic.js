@@ -27,26 +27,26 @@ function () {
     _classCallCheck(this, ClickHandler);
 
     document.addEventListener('click', function (e) {
-      return _this.handleClick(e);
+      return _this._handleClick(e);
     });
-    this.handlers = {};
+    this._handlers = {};
   }
 
   _createClass(ClickHandler, [{
-    key: "handleClick",
-    value: function handleClick(e) {
-      var _this2 = this;
-
-      Object.keys(this.handlers).forEach(function (selector) {
-        if (e.target.matches(selector)) {
-          _this2.handlers[selector](e);
-        }
-      });
-    }
-  }, {
     key: "register",
     value: function register(selector, callback) {
-      this.handlers[selector] = callback;
+      this._handlers[selector] = callback;
+    }
+  }, {
+    key: "_handleClick",
+    value: function _handleClick(e) {
+      var _this2 = this;
+
+      Object.keys(this._handlers).forEach(function (selector) {
+        if (e.target.matches(selector)) {
+          _this2._handlers[selector](e);
+        }
+      });
     }
   }]);
 
@@ -162,7 +162,7 @@ function () {
     _classCallCheck(this, SearchService);
 
     // Where does Bob's awesome API live?
-    this.webservice = "https://limitless-bastion-37095.herokuapp.com/api/songs";
+    this._webservice = "https://limitless-bastion-37095.herokuapp.com/api/songs";
   } // Expects a query string, an array of chords (in the form of strings) and a
   // callback function for when we have a response
 
@@ -175,7 +175,7 @@ function () {
       });
       if (query) parameters.push("query=".concat(encodeURIComponent(query)));
 
-      this._getRequest("".concat(this.webservice, "?").concat(parameters.join('&')), callback);
+      this._getRequest("".concat(this._webservice, "?").concat(parameters.join('&')), callback);
     }
   }, {
     key: "_getRequest",
@@ -220,7 +220,7 @@ function () {
   function SongHistory(repository) {
     _classCallCheck(this, SongHistory);
 
-    this.repository = repository;
+    this._repository = repository;
   }
 
   _createClass(SongHistory, [{
@@ -229,7 +229,7 @@ function () {
       var _this = this;
 
       return new SongList(this._list().map(function (id) {
-        return _this.repository.getSong(id);
+        return _this._repository.getSong(id);
       }));
     }
   }, {
@@ -274,7 +274,7 @@ function () {
   function SongListRenderer(element) {
     _classCallCheck(this, SongListRenderer);
 
-    this.element = element;
+    this._element = element;
   }
 
   _createClass(SongListRenderer, [{
@@ -284,7 +284,7 @@ function () {
       songlist.forEach(function (song) {
         list += "<li><a class='song-link' data-page-link='song-page' data-song-link='".concat(song.id, "'>").concat(song.song_name, " - ").concat(song.artist_name, "</a></li>");
       });
-      this.element.innerHTML = "\n      ".concat(header ? "<h1>".concat(header, " (").concat(songlist.length, ")</h1>") : "", "\n      <ul>\n        ").concat(list, "\n      </ul>\n    ");
+      this._element.innerHTML = "\n      ".concat(header ? "<h1>".concat(header, " (").concat(songlist.length, ")</h1>") : "", "\n      <ul>\n        ").concat(list, "\n      </ul>\n    ");
     }
   }]);
 
@@ -351,13 +351,13 @@ function () {
   function SongRenderer(element) {
     _classCallCheck(this, SongRenderer);
 
-    this.element = element;
+    this._element = element;
   }
 
   _createClass(SongRenderer, [{
     key: "draw",
     value: function draw(song) {
-      this.element.innerHTML = "\n      <h1>".concat(song.song_name, " - ").concat(song.artist_name, "</h1>\n      <pre>").concat(this._markupChords(song.lyrics), "</pre>\n    ");
+      this._element.innerHTML = "\n      <h1>".concat(song.song_name, " - ").concat(song.artist_name, "</h1>\n      <pre>").concat(this._markupChords(song.lyrics), "</pre>\n    ");
     }
   }, {
     key: "_markupChords",
@@ -382,7 +382,7 @@ function () {
   function SongRepository() {
     _classCallCheck(this, SongRepository);
 
-    this.repository = JSON.parse(localStorage.getItem('songList') || "{}");
+    this._repository = JSON.parse(localStorage.getItem('songList') || "{}");
   }
 
   _createClass(SongRepository, [{
@@ -399,24 +399,24 @@ function () {
   }, {
     key: "getSong",
     value: function getSong(id) {
-      return this.repository[id];
+      return this._repository[id];
     }
   }, {
     key: "getSongList",
     value: function getSongList() {
-      return new SongList(Object.values(this.repository));
+      return new SongList(Object.values(this._repository));
     }
   }, {
     key: "_addSong",
     value: function _addSong(song) {
       var saveToLocalStorage = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
-      this.repository[song.id] = song;
+      this._repository[song.id] = song;
       if (saveToLocalStorage) this._saveToLocalStorage();
     }
   }, {
     key: "_saveToLocalStorage",
     value: function _saveToLocalStorage() {
-      localStorage.setItem('songList', JSON.stringify(this.repository));
+      localStorage.setItem('songList', JSON.stringify(this._repository));
     }
   }]);
 

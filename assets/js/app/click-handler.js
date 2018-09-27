@@ -14,20 +14,20 @@
 class ClickHandler {
 
   constructor() {
-    document.addEventListener('click', (e) => this.handleClick(e));
-    this.handlers = {};
-  }
-
-  handleClick(e) {
-    Object.keys(this.handlers).forEach((selector) => {
-      if (e.target.matches(selector)) {
-        this.handlers[selector](e);
-      }
-    });
+    document.addEventListener('click', (e) => this._handleClick(e));
+    this._handlers = {};
   }
 
   register(selector, callback) {
-    this.handlers[selector] = callback;
+    this._handlers[selector] = callback;
+  }
+
+  _handleClick(e) {
+    Object.keys(this._handlers).forEach((selector) => {
+      if (e.target.matches(selector)) {
+        this._handlers[selector](e);
+      }
+    });
   }
 
 }

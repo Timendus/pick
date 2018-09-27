@@ -1,11 +1,11 @@
 class SongRenderer {
 
   constructor(element) {
-    this.element = element;
+    this._element = element;
   }
 
   draw(song) {
-    this.element.innerHTML = `
+    this._element.innerHTML = `
       <h1>${song.song_name} - ${song.artist_name}</h1>
       <pre>${this._markupChords(song.lyrics)}</pre>
     `;
