@@ -1,8 +1,7 @@
-@import 'colours';
+@import 'colours', 'reset';
 
 body {
-  margin: 0;
-  padding: 0;
+  @include reset;
   font-family: Tahoma,Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
   line-height: 1.5;
   min-height: 100vh;
@@ -14,6 +13,7 @@ body {
 /* Page magic */
 
 section.page {
+  @include reset;
   display: none;
   max-width: 900px;
   margin: 0 auto;

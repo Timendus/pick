@@ -1,9 +1,10 @@
 /* Seach component styling */
 
 .page.song-list {
-  @import 'colours';
+  @import 'colours', 'reset';
 
   .text-search {
+    @include reset;
     margin-top: 1em;
     display:flex;
 
@@ -12,6 +13,7 @@
     }
 
     input {
+      @include reset;
       flex: 1;
       padding: 1rem;
       width: 100%;
@@ -34,6 +36,7 @@
     }
 
     .search-button {
+      @include reset;
       background-color: $background-gray;
       border: 1px solid $border-gray;
       flex: 0;
@@ -49,6 +52,7 @@
   /* Chord selection toggles */
 
   .chord-search {
+    @include reset;
     background-color: $soft-yellow;
     margin-top: 1rem;
     padding: 1rem;
@@ -56,14 +60,17 @@
     border-radius: 10px;
 
     p {
-      margin: 0 0 1em 0;
+      @include reset;
+      margin-bottom: 1em;
     }
 
     input {
+      @include reset;
       display: none;
     }
 
     label {
+      @include reset;
       display: inline-block;
       margin: 0.1em 0;
       padding: 0.5em;

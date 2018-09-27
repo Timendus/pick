@@ -1,14 +1,16 @@
 /* Lyrics / chords page styling */
 
 .page.song-item {
-  @import 'colours';
+  @import 'colours', 'reset';
 
   pre {
+    @include reset;
     width: 100%;
     overflow: auto;
     font-size: 16px;
 
     span.chord {
+      @include reset;
       background-color: $primary-yellow;
       color: black;
       padding: 0 3px;
@@ -21,6 +23,7 @@
   }
 
   .back-button {
+    @include reset;
     display: inline-block;
     margin: 1em 0;
     padding: 0.5em 1em;

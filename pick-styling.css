@@ -1,6 +1,7 @@
 body {
-  margin: 0;
-  padding: 0;
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
   font-family: Tahoma, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
   line-height: 1.5;
   min-height: 100vh;
@@ -11,6 +12,9 @@ body {
 
 /* Page magic */
 section.page {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
   display: none;
   max-width: 900px;
   margin: 0 auto;
@@ -25,6 +29,9 @@ section.page.active {
   /* Chord selection toggles */
 }
 .page.song-list .text-search {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
   margin-top: 1em;
   display: flex;
 }
@@ -34,6 +41,9 @@ section.page.active {
   }
 }
 .page.song-list .text-search input {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
   flex: 1;
   padding: 1rem;
   width: 100%;
@@ -52,6 +62,9 @@ section.page.active {
   color: #eeeeee;
 }
 .page.song-list .text-search .search-button {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
   background-color: #2f2f2f;
   border: 1px solid #616161;
   flex: 0;
@@ -62,6 +75,9 @@ section.page.active {
   cursor: pointer;
 }
 .page.song-list .chord-search {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
   background-color: #56500b;
   margin-top: 1rem;
   padding: 1rem;
@@ -69,12 +85,21 @@ section.page.active {
   border-radius: 10px;
 }
 .page.song-list .chord-search p {
-  margin: 0 0 1em 0;
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  margin-bottom: 1em;
 }
 .page.song-list .chord-search input {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
   display: none;
 }
 .page.song-list .chord-search label {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
   display: inline-block;
   margin: 0.1em 0;
   padding: 0.5em;
@@ -95,10 +120,16 @@ section.page.active {
 
 /* Song list styling */
 .page.song-list h1 {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+  margin: 1em 0;
   text-align: center;
 }
 .page.song-list ul {
-  padding: 0;
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
   border: 1px solid #323284;
   border-bottom: 0;
 }
@@ -109,6 +140,9 @@ section.page.active {
   }
 }
 .page.song-list ul li {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
   list-style-type: none;
   border-bottom: 1px solid #323284;
   background-color: #0d0d5d;
@@ -124,6 +158,9 @@ section.page.active {
   background-color: #000033;
 }
 .page.song-list ul li a {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
   padding: 1em;
   width: 100%;
   display: inline-block;
@@ -131,11 +168,17 @@ section.page.active {
 
 /* Lyrics / chords page styling */
 .page.song-item pre {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
   width: 100%;
   overflow: auto;
   font-size: 16px;
 }
 .page.song-item pre span.chord {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
   background-color: #ffea00;
   color: black;
   padding: 0 3px;
@@ -147,6 +190,9 @@ section.page.active {
   }
 }
 .page.song-item .back-button {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
   display: inline-block;
   margin: 1em 0;
   padding: 0.5em 1em;
