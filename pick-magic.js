@@ -39,7 +39,7 @@ function () {
 
       Object.keys(this.handlers).forEach(function (selector) {
         if (e.target.matches(selector)) {
-          _this2.handlers[selector](e.target);
+          _this2.handlers[selector](e);
         }
       });
     }
@@ -67,21 +67,25 @@ window.addEventListener('load', function () {
   clickHandler.register('[name=chords]', search); // Bind form submit handler to the search function
 
   document.querySelectorAll('#search-control').forEach(function (b) {
-    return b.addEventListener('submit', search);
+    return b.addEventListener('submit', function (e) {
+      search();
+      e.preventDefault();
+      return false;
+    });
   }); // Bootstrap song list
 
   renderHistory(); // Helper event handlers
 
-  function selectPage(elm) {
-    document.querySelectorAll('.page').forEach(function (e) {
-      e.classList.remove('active');
+  function selectPage(e) {
+    document.querySelectorAll('.page').forEach(function (p) {
+      return p.classList.remove('active');
     });
-    document.getElementById(elm.getAttribute('data-page-link')).classList.add('active');
+    document.getElementById(e.target.getAttribute('data-page-link')).classList.add('active');
     window.scrollTo(0, 0);
   }
 
-  function selectSong(elm) {
-    var song = songRepository.getSong(elm.getAttribute('data-song-link'));
+  function selectSong(e) {
+    var song = songRepository.getSong(e.target.getAttribute('data-song-link'));
     songRenderer.draw(song);
     songHistory.add(song);
   }
@@ -90,7 +94,7 @@ window.addEventListener('load', function () {
     songListRenderer.draw(songHistory.getSongList(), 'Recent songs');
   }
 
-  function search(e) {
+  function search() {
     var query = document.getElementById("search-song").value;
     var chords = Array.from(document.getElementsByName('chords')).filter(function (checkbox) {
       return checkbox.checked;
@@ -106,9 +110,6 @@ window.addEventListener('load', function () {
         songListRenderer.draw(songList, 'Search results');
       });
     }
-
-    if (e.preventDefault) e.preventDefault();
-    return false;
   }
 });
 "use strict";

@@ -21,7 +21,7 @@ class ClickHandler {
   handleClick(e) {
     Object.keys(this.handlers).forEach((selector) => {
       if (e.target.matches(selector)) {
-        this.handlers[selector](e.target);
+        this.handlers[selector](e);
       }
     });
   }

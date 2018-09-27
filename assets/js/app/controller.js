@@ -14,21 +14,27 @@ window.addEventListener('load', function() {
 
   // Bind form submit handler to the search function
   document.querySelectorAll('#search-control')
-          .forEach((b) => b.addEventListener('submit', search));
+          .forEach((b) => b.addEventListener('submit', (e) => {
+            search();
+            e.preventDefault();
+            return false;
+          }));
 
   // Bootstrap song list
   renderHistory();
 
   // Helper event handlers
 
-  function selectPage(elm) {
-    document.querySelectorAll('.page').forEach((e) => {e.classList.remove('active')});
-    document.getElementById(elm.getAttribute('data-page-link')).classList.add('active');
+  function selectPage(e) {
+    document.querySelectorAll('.page')
+            .forEach((p) => p.classList.remove('active'));
+    document.getElementById(e.target.getAttribute('data-page-link'))
+            .classList.add('active');
     window.scrollTo(0,0);
   }
 
-  function selectSong(elm) {
-    let song = songRepository.getSong(elm.getAttribute('data-song-link'));
+  function selectSong(e) {
+    let song = songRepository.getSong(e.target.getAttribute('data-song-link'));
     songRenderer.draw(song);
     songHistory.add(song);
   }
@@ -37,7 +43,7 @@ window.addEventListener('load', function() {
     songListRenderer.draw(songHistory.getSongList(), 'Recent songs');
   }
 
-  function search(e) {
+  function search() {
     let query  = document.getElementById("search-song").value;
     let chords = Array.from(document.getElementsByName('chords'))
                       .filter((checkbox) => checkbox.checked)
@@ -51,9 +57,6 @@ window.addEventListener('load', function() {
         songListRenderer.draw(songList, 'Search results');
       });
     }
-
-    if (e.preventDefault) e.preventDefault();
-    return false;
   }
 
 });
