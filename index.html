@@ -80,15 +80,13 @@
         <input id="G#m" type="checkbox" name="chords"/><label for="G#m">G#m</label>
         <input id="Gb" type="checkbox" name="chords"/><label for="Gb">Gb</label>
       </div>
-      <h1></h1>
-      <ul id="song-list"></ul>
+      <div id="song-list"></div>
     </section>
 
     <section id="song-page" class="page song-item">
-      <a class="back-button">&laquo; Back to list</a>
-      <h1 id="song-title"></h1>
-      <pre id="song-lyrics"></pre>
-      <a class="back-button">&laquo; Back to list</a>
+      <a class="back-button" data-page-link='list-page'>&laquo; Back to list</a>
+      <div id="song"></div>
+      <a class="back-button" data-page-link='list-page'>&laquo; Back to list</a>
     </section>
 
     <script src="pick-magic.js"></script>
