@@ -5,6 +5,7 @@ class SongListRenderer {
   }
 
   draw(songlist, header) {
+    if (songlist.length != 0) {
     let list = '';
     songlist.forEach((song) => {
       list += `<li><a class='song-link' data-page-link='song-page' data-song-link='${song.id}'>${song.song_name} - ${song.artist_name}</a></li>`;
@@ -16,6 +17,9 @@ class SongListRenderer {
         ${list}
       </ul>
     `;
+    } else {
+      this._element.innerHTML = `<h1>No results found</h1>`;
+    }
   }
 
 }

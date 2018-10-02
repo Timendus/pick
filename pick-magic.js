@@ -280,11 +280,15 @@ function () {
   _createClass(SongListRenderer, [{
     key: "draw",
     value: function draw(songlist, header) {
-      var list = '';
-      songlist.forEach(function (song) {
-        list += "<li><a class='song-link' data-page-link='song-page' data-song-link='".concat(song.id, "'>").concat(song.song_name, " - ").concat(song.artist_name, "</a></li>");
-      });
-      this._element.innerHTML = "\n      ".concat(header ? "<h1>".concat(header, " (").concat(songlist.length, ")</h1>") : "", "\n      <ul>\n        ").concat(list, "\n      </ul>\n    ");
+      if (songlist.length != 0) {
+        var list = '';
+        songlist.forEach(function (song) {
+          list += "<li><a class='song-link' data-page-link='song-page' data-song-link='".concat(song.id, "'>").concat(song.song_name, " - ").concat(song.artist_name, "</a></li>");
+        });
+        this._element.innerHTML = "\n      ".concat(header ? "<h1>".concat(header, " (").concat(songlist.length, ")</h1>") : "", "\n      <ul>\n        ").concat(list, "\n      </ul>\n    ");
+      } else {
+        this._element.innerHTML = "<h1>No results found</h1>";
+      }
     }
   }]);
 
