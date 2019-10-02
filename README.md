@@ -1,3 +1,7 @@
+## Pick
+
+Pick is the most amazing application to search for guitar cords. You can simply select the cord you know and search for songs.
+
 ## Installing
 
 ```bash
