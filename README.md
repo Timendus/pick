@@ -1,3 +1,7 @@
+# Pick
+
+Pick is an awesome™️ application to search for guitar chords. It's unique selling feature: you can select the chords you know and search for songs using only those chords.
+
 ## Installing
 
 ```bash
