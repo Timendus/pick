@@ -1,6 +1,6 @@
-## Pick
+# Pick
 
-Pick is the most amazing application to search for guitar cords. You can simply select the cord you know and search for songs.
+Pick is an awesome™️ application to search for guitar chords. It's unique selling feature: you can select the chords you know and search for songs using only those chords.
 
 ## Installing
 
